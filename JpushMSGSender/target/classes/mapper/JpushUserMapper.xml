@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gmair.dao.JpushUserDao" >
+  <resultMap id="BaseResultMap" type="gmair.entity.JpushUser" >
+    <id column="rid" property="rid" jdbcType="VARCHAR" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="tags" property="tags" jdbcType="VARCHAR" />
+    <result column="isVisitor" property="isvisitor" jdbcType="TINYINT" />
+    <result column="consumerId" property="consumerid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rid, alias, tags, isVisitor, consumerId, name, address, province, city, phone, platform
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from jpushuserinfo
+    where rid = #{rid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectPrimaryKeyByTag" resultType="java.lang.String" parameterType="java.lang.String" >
+    select rid
+    from jpushuserinfo
+    where tags = #{tag,jdbcType=VARCHAR}
+  </select>
+  <select id="getAllTags" resultType="java.lang.String">
+    select distinct(tags)
+    from jpushuserinfo
+  </select>
+  <select id="getAllJpushUserInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from jpushuserinfo
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from jpushuserinfo
+    where rid = #{rid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="gmair.entity.JpushUser" >
+    insert into jpushuserinfo (rid, alias, tags, 
+      isVisitor, consumerId, name, 
+      address, province, city, 
+      phone, platform)
+    values (#{rid,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{isvisitor,jdbcType=TINYINT}, #{consumerid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="gmair.entity.JpushUser" >
+    insert into jpushuserinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="alias != null" >
+        alias,
+      </if>
+      <if test="tags != null" >
+        tags,
+      </if>
+      <if test="isvisitor != null" >
+        isVisitor,
+      </if>
+      <if test="consumerid != null" >
+        consumerId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null" >
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="isvisitor != null" >
+        #{isvisitor,jdbcType=TINYINT},
+      </if>
+      <if test="consumerid != null" >
+        #{consumerid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="gmair.entity.JpushUser" >
+    update jpushuserinfo
+    <set >
+      <if test="alias != null" >
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="isvisitor != null" >
+        isVisitor = #{isvisitor,jdbcType=TINYINT},
+      </if>
+      <if test="consumerid != null" >
+        consumerId = #{consumerid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="gmair.entity.JpushUser" >
+    update jpushuserinfo
+    set alias = #{alias,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      isVisitor = #{isvisitor,jdbcType=TINYINT},
+      consumerId = #{consumerid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+</mapper>
