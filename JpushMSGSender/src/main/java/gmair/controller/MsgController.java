@@ -10,6 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/msg")
+@CrossOrigin
 public class MsgController {
 
     @Autowired
