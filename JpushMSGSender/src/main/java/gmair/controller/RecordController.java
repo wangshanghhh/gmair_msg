@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/record")
+@CrossOrigin
 public class RecordController {
 
     @Autowired
